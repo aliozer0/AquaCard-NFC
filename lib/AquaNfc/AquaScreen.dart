@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nfc_aqu/AquaNfc/AquaService.dart';
+import 'package:nfc_aqu/Login/LoginScreen.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -51,7 +52,23 @@ class _AquaScreenState extends State<AquaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Container Rengini Değiştirme')),
+        appBar: AppBar(
+          title: const Text('Container Rengini Değiştirme'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => loginScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.cancel_outlined,
+                  color: Colors.red,
+                ))
+          ],
+        ),
         body: Center(
           child: StreamBuilder<Color>(
             stream: containerColorSubject$.stream,
@@ -64,41 +81,41 @@ class _AquaScreenState extends State<AquaScreen> {
                 color: containerColorSubject$.value,
                 child: Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 100,
-                          child: Text(
-                            "Yeşil Yap",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: Colors.green,
-                          ),
-                        ),
-                        onTap: () => _changeBackgroundColor(Colors.green),
-                      ),
-                      InkWell(
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 100,
-                          child: const Text(
-                            "Kırmızı yap",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: Colors.red,
-                          ),
-                        ),
-                        onTap: () => _changeBackgroundColor(Colors.red),
-                      ),
+                      // InkWell(
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     height: 40,
+                      //     width: 100,
+                      //     decoration: const BoxDecoration(
+                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
+                      //       color: Colors.green,
+                      //     ),
+                      //     child: const Text(
+                      //       "Yeşil Yap",
+                      //       style: TextStyle(color: Colors.white),
+                      //     ),
+                      //   ),
+                      //   onTap: () => _changeBackgroundColor(Colors.green),
+                      // ),
+                      // InkWell(
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     height: 40,
+                      //     width: 100,
+                      //     decoration: const BoxDecoration(
+                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
+                      //       color: Colors.red,
+                      //     ),
+                      //     child: const Text(
+                      //       "Kırmızı yap",
+                      //       style: TextStyle(color: Colors.white),
+                      //     ),
+                      //   ),
+                      //   onTap: () => _changeBackgroundColor(Colors.red),
+                      // ),
                     ],
                   ),
                 ),
