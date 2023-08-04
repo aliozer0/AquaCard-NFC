@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nfc_aqu/AquaNfc/AquaService.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -12,6 +13,8 @@ class AquaScreen extends StatefulWidget {
 }
 
 class _AquaScreenState extends State<AquaScreen> {
+  final service = AquaService();
+
   BehaviorSubject<Color> containerColorSubject$ =
       BehaviorSubject<Color>.seeded(Colors.grey);
 
@@ -30,7 +33,8 @@ class _AquaScreenState extends State<AquaScreen> {
 
   void _NfcReader() {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      if (tag.data['ndefformatable']['identifier'][0] == (129)) {
+      service.getNfcCard();
+      if (tag.data['ndefformatable']['identifier'][0] == service.getNfcCard()) {
         containerColorSubject$.add(Colors.green);
         Future.delayed(Duration(seconds: 10), () {
           containerColorSubject$.add(Colors.grey);
