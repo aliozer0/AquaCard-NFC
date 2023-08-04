@@ -16,17 +16,26 @@ class _loginScreenState extends State<loginScreen> {
   String _hotelCode = '';
   String _password = '';
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       print('User Code: $_userCode');
       print('Hotel Code: $_hotelCode');
       print('Password: $_password');
-      service.getLogin();
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => AquaScreen(),
-        ),
+      bool response = await service.getLogin(
+        _userCode,
+        _password,
+        _hotelCode,
       );
+
+      print('response: $response');
+
+      if (response) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => AquaScreen(),
+          ),
+        );
+      }
     }
   }
 
@@ -34,14 +43,15 @@ class _loginScreenState extends State<loginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 50),
+                padding: EdgeInsets.only(bottom: 50, top: 20),
                 width: size.width,
                 child: Image.asset(
                   'assets/aquapark_image.jpg',
@@ -51,10 +61,10 @@ class _loginScreenState extends State<loginScreen> {
               Container(
                 width: size.width * 0.7,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Hotel Code'),
+                  decoration: InputDecoration(labelText: 'Tentant'),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter your Hotel Code';
+                      return 'Please enter your Tentant';
                     } else
                       return null;
                   },

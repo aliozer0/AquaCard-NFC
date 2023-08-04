@@ -81,41 +81,41 @@ class _AquaScreenState extends State<AquaScreen> {
                 color: containerColorSubject$.value,
                 child: Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // InkWell(
-                      //   child: Container(
-                      //     alignment: Alignment.center,
-                      //     height: 40,
-                      //     width: 100,
-                      //     decoration: const BoxDecoration(
-                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      //       color: Colors.green,
-                      //     ),
-                      //     child: const Text(
-                      //       "Yeşil Yap",
-                      //       style: TextStyle(color: Colors.white),
-                      //     ),
-                      //   ),
-                      //   onTap: () => _changeBackgroundColor(Colors.green),
-                      // ),
-                      // InkWell(
-                      //   child: Container(
-                      //     alignment: Alignment.center,
-                      //     height: 40,
-                      //     width: 100,
-                      //     decoration: const BoxDecoration(
-                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      //       color: Colors.red,
-                      //     ),
-                      //     child: const Text(
-                      //       "Kırmızı yap",
-                      //       style: TextStyle(color: Colors.white),
-                      //     ),
-                      //   ),
-                      //   onTap: () => _changeBackgroundColor(Colors.red),
-                      // ),
+                      InkWell(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          width: 100,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            color: Colors.green,
+                          ),
+                          child: const Text(
+                            "Yeşil Yap",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        onTap: () => _changeBackgroundColor(Colors.green),
+                      ),
+                      InkWell(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          width: 100,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            color: Colors.red,
+                          ),
+                          child: const Text(
+                            "Kırmızı yap",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        onTap: () => _changeBackgroundColor(Colors.red),
+                      ),
                     ],
                   ),
                 ),

@@ -10,10 +10,8 @@ class AquaService {
       var urle = Uri.parse(url);
       var response = await http.get(urle);
 
-      print('222222222');
       print(response.body);
       if (response.statusCode == 200) {
-        print('3333333');
         print(" Istek başarılı ");
         final number = int.parse(response.body);
         if (number % 2 == 0) {
