@@ -34,8 +34,8 @@ class _AquaScreenState extends State<AquaScreen> {
 
   void _NfcReader() {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      service.getNfcCard();
-      if (tag.data['ndefformatable']['identifier'][0] == service.getNfcCard()) {
+      var status = await service.getNfcCard();
+      if (status) {
         containerColorSubject$.add(Colors.green);
         Future.delayed(Duration(seconds: 10), () {
           containerColorSubject$.add(Colors.grey);
@@ -84,38 +84,38 @@ class _AquaScreenState extends State<AquaScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 100,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: Colors.green,
-                          ),
-                          child: const Text(
-                            "Yeşil Yap",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        onTap: () => _changeBackgroundColor(Colors.green),
-                      ),
-                      InkWell(
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 100,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: Colors.red,
-                          ),
-                          child: const Text(
-                            "Kırmızı yap",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        onTap: () => _changeBackgroundColor(Colors.red),
-                      ),
+                      // InkWell(
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     height: 40,
+                      //     width: 100,
+                      //     decoration: const BoxDecoration(
+                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
+                      //       color: Colors.green,
+                      //     ),
+                      //     child: const Text(
+                      //       "Yeşil Yap",
+                      //       style: TextStyle(color: Colors.white),
+                      //     ),
+                      //   ),
+                      //   onTap: () => _changeBackgroundColor(Colors.green),
+                      // ),
+                      // InkWell(
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     height: 40,
+                      //     width: 100,
+                      //     decoration: const BoxDecoration(
+                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
+                      //       color: Colors.red,
+                      //     ),
+                      //     child: const Text(
+                      //       "Kırmızı yap",
+                      //       style: TextStyle(color: Colors.white),
+                      //     ),
+                      //   ),
+                      //   onTap: () => _changeBackgroundColor(Colors.red),
+                      // ),
                     ],
                   ),
                 ),

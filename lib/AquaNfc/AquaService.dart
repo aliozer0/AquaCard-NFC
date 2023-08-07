@@ -16,13 +16,11 @@ class AquaService {
         final number = int.parse(response.body);
         if (number % 2 == 0) {
           return true;
-        } else {
-          return false;
         }
-      } else {
-        print('Request failed with status: ${response.statusCode}');
         return false;
       }
+      print('Request failed with status: ${response.statusCode}');
+      return false;
     } catch (e) {
       print('Error: $e');
       return false;

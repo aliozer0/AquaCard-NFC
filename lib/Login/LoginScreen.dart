@@ -51,7 +51,8 @@ class _loginScreenState extends State<loginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 50, top: 20),
+                padding:
+                    EdgeInsets.only(bottom: 40, top: 70, right: 10, left: 10),
                 width: size.width,
                 child: Image.asset(
                   'assets/aquapark_image.jpg',
