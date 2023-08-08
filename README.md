@@ -1,16 +1,41 @@
-# nfc_aqu
+# AquaCard NFC
+AquaCard NFC is a Flutter application that enables user authentication through reading NFC cards and verifies their validity.
 
-A new Flutter project.
+## About the Project
+AquaCard NFC is a mobile application that allows users to log in by reading their NFC cards.
+The application performs authentication of NFC cards and checks their validity. 
+If the correct card is read, the screen turns green; otherwise, it displays a red alert. After 10 seconds, the screen returns to grey.
 
-## Getting Started
+## Used Libraries
+The following libraries are used in the application:
 
-This project is a starting point for a Flutter application.
+- [nfc_manager](https://pub.dev/packages/nfc_manager)
+- [http](https://pub.dev/packages/http)
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
+Follow the steps below to set up the project in your local development environment:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone the project: `git clone https://github.com/YOUR_USERNAME/AquaCard-NFC.git`
+2. Install dependencies: `flutter pub get`
+3. ...
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+To use the AquaCard NFC application, follow these steps:
+
+1. Launch the application: `flutter run`
+2. Enter your username and password.
+3. Hold your NFC card against the back of your device.
+4. If the card is verified, the screen will turn green; otherwise, it will display red and return to grey after 10 seconds.
+5. ...
+
+## Screenshots
+Here are some screenshots of the application:
+
+<img src="/assets/loginScreen.png" height="400" alt="Screenshot"/>  
+<img src="/assets/aquaCard-default.png" height="400" alt="Screenshot"/>  
+<img src="/assets/aquaCard-green.png" height="400" alt="Screenshot"/>  
+<img src="/assets/aquaCard-red.png" height="400" alt="Screenshot"/>
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
