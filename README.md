@@ -8,6 +8,7 @@ If the correct card is read, the screen turns green; otherwise, it displays a re
 
 ## Screenshots
 Here are some screenshots of the application:
+
 <img src="/assets/loginScreen.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-deafult.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-green.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-red.png" height="400" alt="Screenshot"/>
 
 ## Used Libraries
