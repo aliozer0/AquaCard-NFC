@@ -6,6 +6,10 @@ AquaCard NFC is a mobile application that allows users to log in by reading thei
 The application performs authentication of NFC cards and checks their validity. 
 If the correct card is read, the screen turns green; otherwise, it displays a red alert. After 10 seconds, the screen returns to grey.
 
+## Screenshots
+Here are some screenshots of the application:
+<img src="/assets/loginScreen.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-deafult.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-green.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-red.png" height="400" alt="Screenshot"/>
+
 ## Used Libraries
 The following libraries are used in the application:
 
@@ -27,12 +31,3 @@ To use AquaCard NFC:
 3. Hold your NFC card against the back of your device.
 4. The screen changes color based on card verification.
 5. HTTP POST requests handle data exchange with the server.
-
-## Screenshots
-Here are some screenshots of the application:
-
-<img src="/assets/loginScreen.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-deafult.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-green.png" height="400" alt="Screenshot"/>  <img src="/assets/aquaCard-red.png" height="400" alt="Screenshot"/>
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
