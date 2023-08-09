@@ -2,15 +2,16 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:nfc_aqu/Login/LoginModel.dart';
-import 'package:rxdart/rxdart.dart';
+
+import '../Global/GlobalVariables.dart';
 
 class loginService {
   LoginResponse? item;
-  final BehaviorSubject<LoginResponse?> login$ = BehaviorSubject.seeded(null);
 
   Future<bool> getLogin(
       String userCode, String password, String tentant) async {
     String url = "https://4001.hoteladvisor.net";
+
     try {
       print({
         "Action": "Login",

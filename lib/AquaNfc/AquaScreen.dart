@@ -34,15 +34,24 @@ class _AquaScreenState extends State<AquaScreen> {
 
   void _NfcReader() {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      var status = await service.getNfcCard();
-      if (status) {
+      print(" DATA :${tag.data["isodep"]["identifier"]}");
+      print("Card : ${tag.handle}");
+      var cardData = (tag.data["isodep"]["identifier"]).toString();
+
+      print(cardData.replaceAll(" ", ""));
+      print(cardData.replaceAll(",", ""));
+      print(cardData.replaceAll("[", ""));
+      print(cardData.replaceAll("]", ""));
+
+      var status = await service.getCard(cardId: cardData);
+      if (status == true) {
         containerColorSubject$.add(Colors.green);
-        Future.delayed(Duration(seconds: 10), () {
+        Future.delayed(Duration(seconds: 5), () {
           containerColorSubject$.add(Colors.grey);
         });
       } else {
         containerColorSubject$.add(Colors.red);
-        Future.delayed(Duration(seconds: 10), () {
+        Future.delayed(Duration(seconds: 5), () {
           containerColorSubject$.add(Colors.grey);
         });
       }
