@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nfc_aqu/AquaNfc/AquaService.dart';
 import 'package:nfc_aqu/Login/LoginScreen.dart';
 import 'package:nfc_manager/nfc_manager.dart';
@@ -18,13 +19,8 @@ class _AquaScreenState extends State<AquaScreen> {
 
   BehaviorSubject<Color> containerColorSubject$ =
       BehaviorSubject<Color>.seeded(Colors.grey);
-
-  void _changeBackgroundColor(Color color) {
-    containerColorSubject$.add(color);
-    Future.delayed(Duration(seconds: 10), () {
-      containerColorSubject$.add(Colors.grey);
-    });
-  }
+  BehaviorSubject<String> lottieAnimationSubject$ =
+      BehaviorSubject<String>.seeded("");
 
   @override
   void initState() {
@@ -44,13 +40,15 @@ class _AquaScreenState extends State<AquaScreen> {
       var status = await service.getCard(cardId: formattedCardData);
       if (status == true) {
         containerColorSubject$.add(Colors.green);
+        lottieAnimationSubject$.add("assets/success.json");
         Future.delayed(Duration(seconds: 5), () {
+          lottieAnimationSubject$.add("assets/animations.json");
           containerColorSubject$.add(Colors.grey);
         });
       } else {
-        containerColorSubject$.add(Colors.red);
+        lottieAnimationSubject$.add("assets/cancel.json");
         Future.delayed(const Duration(seconds: 5), () {
-          containerColorSubject$.add(Colors.grey);
+          lottieAnimationSubject$.add("assets/animations.json");
         });
       }
     });
@@ -58,6 +56,9 @@ class _AquaScreenState extends State<AquaScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    String animatedName = "";
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('WaterHill NFC'),
@@ -77,58 +78,44 @@ class _AquaScreenState extends State<AquaScreen> {
           ],
         ),
         body: Center(
-          child: StreamBuilder<Color>(
-            stream: containerColorSubject$.stream,
-            initialData: Colors.grey,
-            builder: (context, snapshot) {
-              return Container(
-                alignment: Alignment.bottomCenter,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                color: containerColorSubject$.value,
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // InkWell(
-                      //   child: Container(
-                      //     alignment: Alignment.center,
-                      //     height: 40,
-                      //     width: 100,
-                      //     decoration: const BoxDecoration(
-                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      //       color: Colors.green,
-                      //     ),
-                      //     child: const Text(
-                      //       "Yeşil Yap",
-                      //       style: TextStyle(color: Colors.white),
-                      //     ),
-                      //   ),
-                      //   onTap: () => _changeBackgroundColor(Colors.green),
-                      // ),
-                      // InkWell(
-                      //   child: Container(
-                      //     alignment: Alignment.center,
-                      //     height: 40,
-                      //     width: 100,
-                      //     decoration: const BoxDecoration(
-                      //       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      //       color: Colors.red,
-                      //     ),
-                      //     child: const Text(
-                      //       "Kırmızı yap",
-                      //       style: TextStyle(color: Colors.white),
-                      //     ),
-                      //   ),
-                      //   onTap: () => _changeBackgroundColor(Colors.red),
-                      // ),
-                    ],
+          child: StreamBuilder<String>(
+              stream: lottieAnimationSubject$.stream,
+              builder: (context, snapshot) {
+                return Column(children: [
+                  Container(
+                    color: containerColorSubject$.value, // Konteyner rengi
+                    width: double.infinity,
+                    height: 200,
+                    child: Lottie.asset(
+                      animatedName, // Animasyon adı
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
+                ]);
+                // return Container(
+                //     alignment: Alignment.bottomCenter,
+                //     width: size.width,
+                //     height: size.height,
+                //     child: Lottie.asset(animatedName);
+                //
+                //     // Column(
+                //     //   mainAxisAlignment: MainAxisAlignment.center,
+                //     //   crossAxisAlignment: CrossAxisAlignment.center,
+                //     //   children: [
+                //     //     Container(
+                //     //       child: Lottie.asset("assets/success.json"),
+                //     //     ), // Green
+                //     //     Container(
+                //     //       child: Lottie.asset("assets/cancel.json"),
+                //     //     ), // Red
+                //     //     Container(
+                //     //       child: Lottie.asset("assets/animations.json",
+                //     //           height: size.height * 0.5),
+                //     //     ), // Default
+                //     //   ],
+                //     // ),
+                //     );
+              }),
         ));
   }
 }
