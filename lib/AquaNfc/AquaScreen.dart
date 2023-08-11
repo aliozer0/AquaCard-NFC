@@ -34,16 +34,14 @@ class _AquaScreenState extends State<AquaScreen> {
 
   void _NfcReader() {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      print(" DATA :${tag.data["isodep"]["identifier"]}");
-      print("Card : ${tag.handle}");
+      // print(" DATA :${tag.data["isodep"]["identifier"]}");
+      // print("Card : ${tag.handle}");
       var cardData = (tag.data["isodep"]["identifier"]).toString();
 
-      print(cardData.replaceAll(" ", ""));
-      print(cardData.replaceAll(",", ""));
-      print(cardData.replaceAll("[", ""));
-      print(cardData.replaceAll("]", ""));
-
-      var status = await service.getCard(cardId: cardData);
+      String formattedCardData =
+          cardData.replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '');
+      print(" formatCard: $formattedCardData");
+      var status = await service.getCard(cardId: formattedCardData);
       if (status == true) {
         containerColorSubject$.add(Colors.green);
         Future.delayed(Duration(seconds: 5), () {
@@ -51,7 +49,7 @@ class _AquaScreenState extends State<AquaScreen> {
         });
       } else {
         containerColorSubject$.add(Colors.red);
-        Future.delayed(Duration(seconds: 5), () {
+        Future.delayed(const Duration(seconds: 5), () {
           containerColorSubject$.add(Colors.grey);
         });
       }
@@ -62,7 +60,7 @@ class _AquaScreenState extends State<AquaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Container Rengini Değiştirme'),
+          title: const Text('WaterHill NFC'),
           actions: [
             IconButton(
                 onPressed: () {
@@ -90,7 +88,7 @@ class _AquaScreenState extends State<AquaScreen> {
                 color: containerColorSubject$.value,
                 child: Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       // InkWell(

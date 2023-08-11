@@ -9,7 +9,6 @@ class AquaService {
   Future<bool> getNfcCard() async {
     String url =
         'https://www.randoxm.org/integers/?num=1&min=1&max=9&col=1&base=10&format=plain&rnd=new';
-    print('i111111');
 
     try {
       var urle = Uri.parse(url);
@@ -35,7 +34,6 @@ class AquaService {
   Future<bool?> getCard({String? cardId}) async {
     String url = "https://4001.hoteladvisor.net/";
     try {
-      print("11111");
       var response = await http.post(Uri.parse(url),
           body: json.encode({
             "Parameters": {
@@ -50,7 +48,6 @@ class AquaService {
             "LoginToken": login$.value!.loginToken
           }));
 
-      print("22222222");
       if (response.statusCode == 200) {
         print(" NFC isteği başarılı ");
         print(response.body);
