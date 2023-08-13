@@ -13,12 +13,6 @@ class loginService {
     String url = "https://4001.hoteladvisor.net";
 
     try {
-      print({
-        "Action": "Login",
-        "Usercode": userCode,
-        "Password": password,
-        "Tenant": tentant,
-      });
       var response = await http.post(Uri.parse(url),
           body: json.encode({
             "Action": "Login",
@@ -28,7 +22,7 @@ class loginService {
           }));
 
       if (response.statusCode == 200) {
-        print("Giriş başarılı");
+        print("Login Request Success");
         var responseData = jsonDecode(response.body);
         if (responseData["Success"]) {
           login$.value = LoginResponse.fromJson(responseData);
@@ -39,7 +33,7 @@ class loginService {
       }
       return false;
     } catch (e) {
-      print("hataa");
+      print("Error");
       print(e);
       return false;
     }

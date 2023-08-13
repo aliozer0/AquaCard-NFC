@@ -20,7 +20,7 @@ class _AquaScreenState extends State<AquaScreen> {
   BehaviorSubject<Color> containerColorSubject$ =
       BehaviorSubject<Color>.seeded(Colors.grey);
   BehaviorSubject<String> lottieAnimationSubject$ =
-      BehaviorSubject<String>.seeded("");
+      BehaviorSubject<String>.seeded("assets/animation/animations.json");
 
   @override
   void initState() {
@@ -30,25 +30,23 @@ class _AquaScreenState extends State<AquaScreen> {
 
   void _NfcReader() {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      // print(" DATA :${tag.data["isodep"]["identifier"]}");
-      // print("Card : ${tag.handle}");
       var cardData = (tag.data["isodep"]["identifier"]).toString();
 
       String formattedCardData =
           cardData.replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '');
-      print(" formatCard: $formattedCardData");
+      print(" CardID: $formattedCardData");
       var status = await service.getCard(cardId: formattedCardData);
+
       if (status == true) {
-        containerColorSubject$.add(Colors.green);
-        lottieAnimationSubject$.add("assets/success.json");
+        lottieAnimationSubject$.add("assets/animation/success.json");
         Future.delayed(Duration(seconds: 5), () {
-          lottieAnimationSubject$.add("assets/animations.json");
+          lottieAnimationSubject$.add("assets/animation/animations.json");
           containerColorSubject$.add(Colors.grey);
         });
       } else {
-        lottieAnimationSubject$.add("assets/cancel.json");
+        lottieAnimationSubject$.add("assets/animation/cancel.json");
         Future.delayed(const Duration(seconds: 5), () {
-          lottieAnimationSubject$.add("assets/animations.json");
+          lottieAnimationSubject$.add("assets/animation/animations.json");
         });
       }
     });
@@ -80,10 +78,11 @@ class _AquaScreenState extends State<AquaScreen> {
         body: Center(
           child: StreamBuilder<String>(
               stream: lottieAnimationSubject$.stream,
+              initialData: "assets/animation/animations.json",
               builder: (context, snapshot) {
                 return Column(children: [
                   Container(
-                    color: containerColorSubject$.value, // Konteyner rengi
+                    color: Colors.white, // Konteyner rengi
                     width: double.infinity,
                     height: 200,
                     child: Lottie.asset(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_aqu/AquaNfc/AquaScreen.dart';
 import 'package:nfc_aqu/Login/LoginService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class loginScreen extends StatefulWidget {
   const loginScreen({Key? key}) : super(key: key);
@@ -26,9 +27,36 @@ class _loginScreenState extends State<loginScreen> {
         _password,
         _hotelCode,
       );
+      if (response) {
+        await saveLoginInfo(_userCode, _hotelCode, _password);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => AquaScreen(),
+          ),
+        );
+      }
+    }
+  }
 
-      print('response: $response');
+  Future<void> saveLoginInfo(
+      String userCode, String hotelCode, String password) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userCode', userCode);
+    await prefs.setString('hotelCode', hotelCode);
+    await prefs.setString('password', password);
+  }
 
+  Future<void> autoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedUserCode = prefs.getString('userCode');
+    final savedHotelCode = prefs.getString('hotelCode');
+    final savedPassword = prefs.getString('password');
+
+    if (savedUserCode != null &&
+        savedHotelCode != null &&
+        savedPassword != null) {
+      bool response =
+          await service.getLogin(savedUserCode, savedPassword, savedHotelCode);
       if (response) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(

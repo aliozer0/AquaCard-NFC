@@ -3,8 +3,12 @@ import 'package:get_it/get_it.dart';
 import 'package:nfc_aqu/Login/LoginScreen.dart';
 import 'package:nfc_aqu/Login/LoginService.dart';
 
+final loginscreens = loginScreen();
 void main() {
   GetIt.I.registerSingleton<loginService>(loginService());
+
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
