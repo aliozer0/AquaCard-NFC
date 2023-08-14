@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nfc_aqu/AquaNfc/AquaService.dart';
-import 'package:nfc_aqu/Login/LoginScreen.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -61,18 +60,18 @@ class _AquaScreenState extends State<AquaScreen> {
         appBar: AppBar(
           title: const Text('WaterHill NFC'),
           actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => loginScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.cancel_outlined,
-                  color: Colors.red,
-                ))
+            // IconButton(
+            //     onPressed: () {
+            //       Navigator.of(context).pushReplacement(
+            //         MaterialPageRoute(
+            //           builder: (context) => loginScreen(),
+            //         ),
+            //       );
+            //     },
+            //     icon: const Icon(
+            //       Icons.cancel_outlined,
+            //       color: Colors.red,
+            //     ))
           ],
         ),
         body: Center(
@@ -84,8 +83,8 @@ class _AquaScreenState extends State<AquaScreen> {
                   Container(
                     color: Colors.white, // Conteyner rengi
                     width: double.infinity,
-                    height: 200,
-                    alignment: Alignment.center,
+                    height: size.height * 0.7,
+
                     child: Center(
                       child: Lottie.asset(
                         snapshot.data!, // Animasyon adı
