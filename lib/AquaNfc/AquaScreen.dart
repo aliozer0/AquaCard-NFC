@@ -82,12 +82,15 @@ class _AquaScreenState extends State<AquaScreen> {
               builder: (context, snapshot) {
                 return Column(children: [
                   Container(
-                    color: Colors.white, // Konteyner rengi
+                    color: Colors.white, // Conteyner rengi
                     width: double.infinity,
                     height: 200,
-                    child: Lottie.asset(
-                      animatedName, // Animasyon adı
-                      fit: BoxFit.cover,
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: Lottie.asset(
+                        snapshot.data!, // Animasyon adı
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ]);

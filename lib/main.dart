@@ -7,8 +7,6 @@ final loginscreens = loginScreen();
 void main() {
   GetIt.I.registerSingleton<loginService>(loginService());
 
-  WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const MyApp());
 }
 

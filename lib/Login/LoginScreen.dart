@@ -68,6 +68,12 @@ class _loginScreenState extends State<loginScreen> {
   }
 
   @override
+  void initState() {
+    autoLogin();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -135,6 +141,7 @@ class _loginScreenState extends State<loginScreen> {
               SizedBox(height: 16.0),
               InkWell(
                 child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
                   alignment: Alignment.center,
                   width: size.width * 0.3,
                   height: size.height * 0.04,
@@ -143,7 +150,7 @@ class _loginScreenState extends State<loginScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: const Text(
                     "Login",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ),
                 onTap: () => _submitForm(),
