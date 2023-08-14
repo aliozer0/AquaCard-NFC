@@ -9,7 +9,7 @@ If the correct card is read, the screen turns green; otherwise, it displays a re
 ## Screenshots
 Here are some screenshots of the application:
 
-<img src="/assets/loginScreen.png" height="400" alt="Screenshot"/>  <img src="/assets/image/NfcDefault.png'" height="400" alt="Screenshot"/>  <img src="/assets/image/NfcSuccess.png" height="400" alt="Screenshot"/>  <img src="/assets/image/NfcCancel.png" height="400" alt="Screenshot"/>
+<img src="/assets/loginScreen.png" height="400" alt="Screenshot"/>  <img src="/assets/image/NfcDefaults.png'" height="400" alt="Screenshot"/>  <img src="/assets/image/NfcSuccess.png" height="400" alt="Screenshot"/>  <img src="/assets/image/NfcCancel.png" height="400" alt="Screenshot"/>
 
 ## Used Libraries
 The following libraries are used in the application:
