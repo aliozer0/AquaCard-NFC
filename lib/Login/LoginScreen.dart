@@ -1,3 +1,7 @@
+/*
+Login Sayfamız. Kullanıcının bilgilerinin doğruluğunu kontrol ediyoruz.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:nfc_aqu/AquaNfc/AquaScreen.dart';
 import 'package:nfc_aqu/Login/LoginService.dart';
@@ -31,8 +35,8 @@ class _loginScreenState extends State<loginScreen> {
       if (response) {
         await saveLoginInfo(_userCode, _hotelCode, _password);
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => AquaScreen(),
+          MaterialPageRoute(                         
+            builder: (context) => AquaScreen(),   //Uygulamamızın ana ekranına gidiyoruz
           ),
         );
       }
@@ -86,7 +90,7 @@ class _loginScreenState extends State<loginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size; //Uygulamanın çalıştığı telefonun ekran boyutlarını almamıza olanak sağlıyor. Buna göre adaptif bir UI tasarlıyoruz.
     if (isLoading) {
       return const Center(
         child: CircularProgressIndicator(

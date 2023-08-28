@@ -1,3 +1,7 @@
+/*
+Bu modülde kullanıcı giriş butonuna bastıktan sonra Server'a istek atılır. Eğer istek başarılı ise BehaviorSubject objesi olan login$'in değerine server'dan dönen istek atanır.
+*/
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -14,7 +18,7 @@ class loginService {
     String url = "https://4001.hoteladvisor.net";
 
     try {
-      var response = await http.post(Uri.parse(url),
+      var response = await http.post(Uri.parse(url), //Verilen url'ye istek attığımız yer burası.
           body: json.encode({
             "Action": "Login",
             "Usercode": userCode,
@@ -34,7 +38,7 @@ class loginService {
         throw responseData["Message"];
       }
       return false;
-    } catch (e) {
+    } catch (e) { //İstek atma  sırasında bir hata olursa program bloğa girip false döndürecek.
       print("Error");
       print(e);
       return false;
