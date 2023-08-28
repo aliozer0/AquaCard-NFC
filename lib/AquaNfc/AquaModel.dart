@@ -1,3 +1,7 @@
+/*
+Server'a istek atıyoruz. Dönen cevabı daha kolay kontrol etmek için böyle bir model class oluşturuyoruz
+*/
+
 class CardResponse {
   bool? success;
   String? message;
