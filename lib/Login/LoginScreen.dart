@@ -1,3 +1,7 @@
+/*
+Login Sayfamız. Kullanıcının bilgilerinin doğruluğunu kontrol ediyoruz.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:nfc_aqu/AquaNfc/AquaScreen.dart';
 import 'package:nfc_aqu/Login/LoginService.dart';
