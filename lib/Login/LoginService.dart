@@ -7,6 +7,7 @@ import '../Global/GlobalVariables.dart';
 
 class loginService {
   LoginResponse? item;
+  // loginService getLogin() fonkisyonu ile userCode,tentant ve password sunucumuza iletiyoruz. Eğer kullanıcı doğruysa Response.statusCode==200 gelecek değilse error mesajı geri döndürecek.
 
   Future<bool> getLogin(
       String userCode, String password, String tentant) async {

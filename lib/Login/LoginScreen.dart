@@ -80,15 +80,15 @@ class _loginScreenState extends State<loginScreen> {
 
   @override
   void initState() {
-    autoLogin();
-    super.initState(); // sayfa ilk açılır açılmaz bunun kontrolunu sağlıyoruz.
+    autoLogin(); // sayfa ilk açılır açılmaz bunun kontrolunu sağlıyoruz.
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     if (isLoading) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(
           color: Colors.indigoAccent,
           backgroundColor: Colors.white,

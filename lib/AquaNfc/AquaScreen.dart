@@ -32,8 +32,11 @@ class _AquaScreenState extends State<AquaScreen> {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
       var cardData = (tag.data["isodep"]["identifier"]).toString();
 
-      String formattedCardData =
-          cardData.replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '');
+      String formattedCardData = cardData
+          .replaceAll('[', '')
+          .replaceAll(']', '')
+          .replaceAll(' ',
+              ''); // cardId normalde [13, 20, 55 ,54 ,158] formatında geliyor.Kendi istediğimiz formata çeviriyoruz.
       print(" CardID: $formattedCardData");
       var status = await service.getCard(cardId: formattedCardData);
 
@@ -83,29 +86,6 @@ class _AquaScreenState extends State<AquaScreen> {
                     ),
                   ),
                 ]);
-                // return Container(
-                //     alignment: Alignment.bottomCenter,
-                //     width: size.width,
-                //     height: size.height,
-                //     child: Lottie.asset(animatedName);
-                //
-                //     // Column(
-                //     //   mainAxisAlignment: MainAxisAlignment.center,
-                //     //   crossAxisAlignment: CrossAxisAlignment.center,
-                //     //   children: [
-                //     //     Container(
-                //     //       child: Lottie.asset("assets/success.json"),
-                //     //     ), // Green
-                //     //     Container(
-                //     //       child: Lottie.asset("assets/cancel.json"),
-                //     //     ), // Red
-                //     //     Container(
-                //     //       child: Lottie.asset("assets/animations.json",
-                //     //           height: size.height * 0.5),
-                //     //     ), // Default
-                //     //   ],
-                //     // ),
-                //     );
               }),
         ));
   }
