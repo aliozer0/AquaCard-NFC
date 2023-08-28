@@ -6,31 +6,7 @@ import 'package:nfc_aqu/Global/GlobalVariables.dart';
 import 'AquaModel.dart';
 
 class AquaService {
-  Future<bool> getNfcCard() async {
-    String url =
-        'https://www.randoxm.org/integers/?num=1&min=1&max=9&col=1&base=10&format=plain&rnd=new';
-
-    try {
-      var urle = Uri.parse(url);
-      var response = await http.get(urle);
-
-      print(response.body);
-      if (response.statusCode == 200) {
-        print(" Istek başarılı ");
-        final number = int.parse(response.body);
-        if (number % 2 == 0) {
-          return true;
-        }
-        return false;
-      }
-      print('Request failed with status: ${response.statusCode}');
-      return false;
-    } catch (e) {
-      print('Error: $e');
-      return false;
-    }
-  }
-
+  // Turnike isteği atıyor. kartın sistemde tanımlı olup olmadığını kontrol ediyoruz.
   Future<bool?> getCard({String? cardId}) async {
     String url = "https://4001.hoteladvisor.net/";
     try {
@@ -62,4 +38,29 @@ class AquaService {
       return false;
     }
   }
+
+  // Future<bool> getNfcCard() async {
+  //   String url =
+  //       'https://www.randoxm.org/integers/?num=1&min=1&max=9&col=1&base=10&format=plain&rnd=new';
+  //
+  //   try {
+  //     var urle = Uri.parse(url);
+  //     var response = await http.get(urle);
+  //
+  //     print(response.body);
+  //     if (response.statusCode == 200) {
+  //       print(" Istek başarılı ");
+  //       final number = int.parse(response.body);
+  //       if (number % 2 == 0) {
+  //         return true;
+  //       }
+  //       return false;
+  //     }
+  //     print('Request failed with status: ${response.statusCode}');
+  //     return false;
+  //   } catch (e) {
+  //     print('Error: $e');
+  //     return false;
+  //   }
+  // }
 }

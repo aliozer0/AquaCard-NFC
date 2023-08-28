@@ -13,10 +13,11 @@ class loginScreen extends StatefulWidget {
 class _loginScreenState extends State<loginScreen> {
   final service = loginService();
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = true;
   String _userCode = '';
   String _hotelCode = '';
   String _password = '';
-
+  //_submitForm fonksiyonu ile kullanıcıdan girilen bilgileri servicedeki getLogin() fonksiyonu gönderiyoruz. Eğer kullanıcı bilgileri doğruysa response true gelir ve AquaScreen sayfasına gitmemizi sağlar.
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       print('User Code: $_userCode');
@@ -38,6 +39,7 @@ class _loginScreenState extends State<loginScreen> {
     }
   }
 
+  // saveLoginInfo fonksiyonu ile kullannıcı daha önceden bilgilerini girmişse bu fonksiyion ile girdiğimiz bilgileri hatırlamamızı sağlıyor.Bunu da SharedPreferences ile sağlıyoruz.
   Future<void> saveLoginInfo(
       String userCode, String hotelCode, String password) async {
     final prefs = await SharedPreferences.getInstance();
@@ -46,7 +48,8 @@ class _loginScreenState extends State<loginScreen> {
     await prefs.setString('password', password);
   }
 
-  Future<void> autoLogin() async {
+  // autologin fonksiyonu saveloginInfoda tutulan bilgileri kullanarak sisteme giriş yapmamızı sağlıyor.Eğer kullanıcı doğruysa AquaScreen sayfasına gider.
+  Future<bool?> autoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     final savedUserCode = prefs.getString('userCode');
     final savedHotelCode = prefs.getString('hotelCode');
@@ -63,102 +66,119 @@ class _loginScreenState extends State<loginScreen> {
             builder: (context) => AquaScreen(),
           ),
         );
+      } else {
+        setState(() {
+          isLoading = false;
+        });
       }
+    } else {
+      setState(() {
+        isLoading = true;
+      });
     }
   }
 
   @override
   void initState() {
     autoLogin();
-    super.initState();
+    super.initState(); // sayfa ilk açılır açılmaz bunun kontrolunu sağlıyoruz.
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding:
-                    EdgeInsets.only(bottom: 40, top: 70, right: 10, left: 10),
-                width: size.width,
-                child: Image.asset(
-                  'assets/aquapark_image.jpg',
-                  fit: BoxFit.contain,
-                ),
-              ),
-              Container(
-                width: size.width * 0.7,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Tentant'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your Tentant';
-                    } else
-                      return null;
-                  },
-                  onChanged: (value) {
-                    _hotelCode = value;
-                  },
-                ),
-              ),
-              Container(
-                width: size.width * 0.7,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'User Code'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your User Code';
-                    } else
-                      return null;
-                  },
-                  onChanged: (value) {
-                    _userCode = value;
-                  },
-                ),
-              ),
-              Container(
-                width: size.width * 0.7,
-                child: TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Password'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                  },
-                  onChanged: (value) {
-                    _password = value;
-                  },
-                ),
-              ),
-              SizedBox(height: 16.0),
-              InkWell(
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  alignment: Alignment.center,
-                  width: size.width * 0.3,
-                  height: size.height * 0.04,
-                  decoration: const BoxDecoration(
-                      color: Colors.indigoAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+    if (isLoading) {
+      return Center(
+        child: CircularProgressIndicator(
+          color: Colors.indigoAccent,
+          backgroundColor: Colors.white,
+        ),
+      );
+    } else {
+      return Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding:
+                      EdgeInsets.only(bottom: 40, top: 70, right: 10, left: 10),
+                  width: size.width,
+                  child: Image.asset(
+                    'assets/image/aquapark_image.jpg',
+                    fit: BoxFit.contain,
                   ),
                 ),
-                onTap: () => _submitForm(),
-              )
-            ],
+                SizedBox(
+                  width: size.width * 0.7,
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: 'Tentant'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your Tentant';
+                      } else
+                        return null;
+                    },
+                    onChanged: (value) {
+                      _hotelCode = value;
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * 0.7,
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: 'User Code'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your User Code';
+                      } else
+                        return null;
+                    },
+                    onChanged: (value) {
+                      _userCode = value;
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * 0.7,
+                  child: TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(labelText: 'Password'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                    },
+                    onChanged: (value) {
+                      _password = value;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                InkWell(
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    alignment: Alignment.center,
+                    width: size.width * 0.3,
+                    height: size.height * 0.04,
+                    decoration: const BoxDecoration(
+                        color: Colors.indigoAccent,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                  ),
+                  onTap: () => _submitForm(),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

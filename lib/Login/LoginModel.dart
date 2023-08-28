@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+// loginResponse adında bir model oluşturduk.Bu modeli kullanarak kullanıcının bilgilerini kontrol edebiliriz.
+
 LoginResponse loginresponseFromJson(String str) =>
     LoginResponse.fromJson(json.decode(str));
 

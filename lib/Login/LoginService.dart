@@ -22,6 +22,7 @@ class loginService {
           }));
 
       if (response.statusCode == 200) {
+        // istek başarılı
         print("Login Request Success");
         var responseData = jsonDecode(response.body);
         if (responseData["Success"]) {

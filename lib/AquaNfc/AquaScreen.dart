@@ -27,6 +27,7 @@ class _AquaScreenState extends State<AquaScreen> {
     _NfcReader();
   }
 
+// Nfc okumanın gerçekleştiği fonksiyon
   void _NfcReader() {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
       var cardData = (tag.data["isodep"]["identifier"]).toString();
@@ -37,12 +38,14 @@ class _AquaScreenState extends State<AquaScreen> {
       var status = await service.getCard(cardId: formattedCardData);
 
       if (status == true) {
+        // kart doğru ise ekranda success animasyonu çıkacak 5 sn sonra default animasyon çıkacak.
         lottieAnimationSubject$.add("assets/animation/success.json");
         Future.delayed(Duration(seconds: 5), () {
           lottieAnimationSubject$.add("assets/animation/animations.json");
           containerColorSubject$.add(Colors.grey);
         });
       } else {
+        // kart yanlış ise ekranda cancel animasyonu çıkacak 5 sn sonra default animasyon çıkacak.
         lottieAnimationSubject$.add("assets/animation/cancel.json");
         Future.delayed(const Duration(seconds: 5), () {
           lottieAnimationSubject$.add("assets/animation/animations.json");
@@ -59,20 +62,7 @@ class _AquaScreenState extends State<AquaScreen> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('WaterHill NFC'),
-          actions: [
-            // IconButton(
-            //     onPressed: () {
-            //       Navigator.of(context).pushReplacement(
-            //         MaterialPageRoute(
-            //           builder: (context) => loginScreen(),
-            //         ),
-            //       );
-            //     },
-            //     icon: const Icon(
-            //       Icons.cancel_outlined,
-            //       color: Colors.red,
-            //     ))
-          ],
+          actions: [],
         ),
         body: Center(
           child: StreamBuilder<String>(
