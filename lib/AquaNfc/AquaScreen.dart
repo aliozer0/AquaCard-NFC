@@ -1,3 +1,6 @@
+/*
+Kullanıcı bu sayfada kartını okutuyor.
+*/
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -30,7 +33,7 @@ class _AquaScreenState extends State<AquaScreen> {
 // Nfc okumanın gerçekleştiği fonksiyon
   void _NfcReader() {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      var cardData = (tag.data["isodep"]["identifier"]).toString();
+      var cardData = (tag.data["isodep"]["identifier"]).toString(); //Kart okutulduğunda kart ile alakalı tüm bilgiler tag.data altında bulunuyor.
 
       String formattedCardData = cardData
           .replaceAll('[', '')
@@ -59,7 +62,7 @@ class _AquaScreenState extends State<AquaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size; //Uygulamanın çalıştığı ekranın boyut bilgilerini almamıza olanak sağlıyor. Böylece adaptif bir boyutlama yapıyoruz.
     String animatedName = "";
 
     return Scaffold(
@@ -69,7 +72,7 @@ class _AquaScreenState extends State<AquaScreen> {
         ),
         body: Center(
           child: StreamBuilder<String>(
-              stream: lottieAnimationSubject$.stream,
+              stream: lottieAnimationSubject$.stream, //Bu değişken değiştiği zaman builder'in altındaki kısım tekrar oluşturulacak.
               initialData: "assets/animation/animations.json",
               builder: (context, snapshot) {
                 return Column(children: [
