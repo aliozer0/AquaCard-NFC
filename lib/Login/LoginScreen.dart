@@ -17,7 +17,7 @@ class _loginScreenState extends State<loginScreen> {
   String _userCode = '';
   String _hotelCode = '';
   String _password = '';
-  //_submitForm fonksiyonu ile kullanıcıdan girilen bilgileri servicedeki getLogin() fonksiyonu gönderiyoruz. Eğer kullanıcı bilgileri doğruysa response true gelir ve AquaScreen sayfasına gitmemizi sağlar.
+  //_submitForm fonksiyonu ile kullanıcıdan girilen bilgileri servicede ki getLogin() fonksiyonu gönderiyoruz. Eğer kullanıcı bilgileri doğruysa response true gelir ve AquaScreen sayfasına gitmemizi sağlar.
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       print('User Code: $_userCode');
