@@ -65,7 +65,6 @@ class _loginScreenState extends State<loginScreen> {
         savedPassword != null) {
       bool response =
           await service.getLogin(savedUserCode, savedPassword, savedHotelCode);
-      print(response);
       if (response) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -74,12 +73,12 @@ class _loginScreenState extends State<loginScreen> {
         );
       } else {
         setState(() {
-          isLoading = false;
+          isLoading = true;
         });
       }
     } else {
       setState(() {
-        isLoading = true;
+        isLoading = false;
       });
     }
   }
@@ -93,7 +92,7 @@ class _loginScreenState extends State<loginScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context)
-        .size; //Uygulamanın çalıştığı telefonuna ekran boyutlarını almamıza olanak sağlıyor. Buna göre adaptif bir UI tasarlıyoruz.
+        .size; //Uygulamanın çalıştığı telefonun ekran boyutlarını almamıza olanak sağlıyor. Buna göre adaptif bir UI tasarlıyoruz.
     if (isLoading) {
       return const Center(
         child: CircularProgressIndicator(
